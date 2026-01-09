@@ -1,0 +1,8 @@
+{
+  "name": "Storybeat AI - Generador de Storyboards",
+  "description": "Una aplicación avanzada para transformar canciones en storyboards visuales detallados con análisis de género, BPM y estilos artísticos generados por IA.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

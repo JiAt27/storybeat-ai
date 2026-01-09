@@ -3,8 +3,8 @@ import { GoogleGenAI, Type, GenerateContentResponse } from "@google/genai";
 import { SongAnalysis, StoryboardScene, AspectRatio, VisualStyle } from "./types";
 
 // Usamos import.meta.env porque es lo que Vite requiere
-const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY }); 
-const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
+const getApiKey = () => typeof localStorage !== 'undefined' ? (localStorage.getItem('gemini_api_key') || import.meta.env.VITE_GEMINI_API_KEY) : import.meta.env.VITE_GEMINI_API_KEY;
+const ai = new GoogleGenAI({ apiKey: getApiKey() });const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
 async function withRetry<T>(fn: () => Promise<T>, maxRetries = 3): Promise<T> {
   let lastError: any;

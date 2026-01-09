@@ -2,9 +2,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { AppView, SongAnalysis, AspectRatio, VisualStyle, Storyboard, StoryboardScene } from './types';
 import { analyzeSong, generateImage, generateStoryboardPlan, generateMoreStyles } from './geminiService';
-import Header from './components/PageHeader';
-import LoadingOverlay from './components/LoadingOverlay';
-import JSZip from 'jszip';
+import Header from './PageHeader';
+import LoadingOverlay from './LoadingOverlay';
+  ;import JSZip from 'jszip';
 
 // Componente Button estrictamente Material Design 3 (Google)
 const Button: React.FC<{

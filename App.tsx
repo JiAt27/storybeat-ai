@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { AppView, SongAnalysis, AspectRatio, VisualStyle, Storyboard, StoryboardScene } from './types';
 import { analyzeSong, generateImage, generateStoryboardPlan, generateMoreStyles } from './geminiService';
-import Header from './components/Header';
+import Header from './components/header';
 import LoadingOverlay from './components/LoadingOverlay';
 import JSZip from 'jszip';
 

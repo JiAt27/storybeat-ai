@@ -56,7 +56,7 @@ const App: React.FC = () => {
   useEffect(() => {
     // Always start with INPUT view since we use URL parameters for API key
     setView(AppView.INPUT);
-  }, [])};
+  }, [])
 
   const handleAudioUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

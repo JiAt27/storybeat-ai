@@ -394,5 +394,6 @@ const App: React.FC = () => {
       </main>
     </div>
   )
+};
 
 export default App;

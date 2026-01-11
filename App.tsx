@@ -187,7 +187,7 @@ const App: React.FC = () => {
     if (isPlaying) audioRef.current.pause();
     else audioRef.current.play();
     setIsPlaying(!isPlaying);
-  };
+      };
 
   return (
     <div className="min-h-screen bg-[#F8F9FA] selection:bg-[#1a73e8]/20">

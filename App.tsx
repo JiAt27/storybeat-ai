@@ -54,22 +54,9 @@ const App: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
-    const checkKey = async () => {
-      const hasKey = await (window as any).aistudio.hasSelectedApiKey();
-      if (hasKey) setView(AppView.INPUT);
-      else setView(AppView.AUTH);
-    };
-    checkKey();
-  }, []);
-
-  const handleOpenKey = async () => {
-    try {
-      await (window as any).aistudio.openSelectKey();
-      setView(AppView.INPUT);
-    } catch (e) {
-      console.error("Error al configurar la API Key", e);
-    }
-  };
+    // Always start with INPUT view since we use URL parameters for API key
+    setView(AppView.INPUT);
+  }, [])};
 
   const handleAudioUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

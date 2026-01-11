@@ -3,7 +3,7 @@ import { GoogleGenAI, Type, GenerateContentResponse } from "@google/genai";
 import { SongAnalysis, StoryboardScene, AspectRatio, VisualStyle } from "./types";
 
 // Usamos import.meta.env porque es lo que Vite requiere
- () => {
+ const getApiKey = () => {
   // Check URL parameters first
   if (typeof window !== 'undefined') {
     const urlParams = new URLSearchParams(window.location.search);

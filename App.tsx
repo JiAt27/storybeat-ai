@@ -32,6 +32,8 @@ const Button: React.FC<{
 
 const App: React.FC = () => {
   const [view, setView] = useState<AppView>(AppView.AUTH);
+    const [showApiKeyModal, setShowApiKeyModal] = useState(false);
+    const [apiKeyInput, setApiKeyInput] = useState('');
   const [loading, setLoading] = useState<string | null>(null);
   
   const [title, setTitle] = useState('');
@@ -54,11 +56,26 @@ const App: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
-    // Always start with INPUT view since we use URL parameters for API key
-    setView(AppView.INPUT);
-  }, [])
+    const apiKey = localStorage.getItem('gemini_api_key');
+    if (apiKey) {
+      setView(AppView.INPUT);
+    } else {
+      setView(AppView.AUTH);
+    }
+  }, []);
+  
+    const handleOpenKey = () => {
+    setShowApiKeyModal(true);
+  };
 
-  const handleAudioUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSaveApiKey = () => {
+    if (apiKeyInput.trim()) {
+      localStorage.setItem('gemini_api_key', apiKeyInput.trim());
+      setShowApiKeyModal(false);
+      setApiKeyInput('');
+      setView(AppView.INPUT);
+    }
+  };const handleAudioUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setAudioFile(file);
@@ -217,6 +234,28 @@ const App: React.FC = () => {
               </a>
             </div>
           </div>
+
+              {/* Modal para introducir API Key */}
+        {showApiKeyModal && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-[32px] p-10 max-w-md w-full shadow-2xl border border-[#dadce0] space-y-6">
+              <h3 className="text-2xl font-semibold text-[#202124] tracking-tight text-center">Vincular API Key</h3>
+              <p className="text-sm text-[#5f6368] text-center">Introduce tu clave de API de Google AI Studio para comenzar.</p>
+              <input 
+                type="text" 
+                value={apiKeyInput} 
+                onChange={(e) => setApiKeyInput(e.target.value)}
+                placeholder="AIza..." 
+                className="w-full bg-[#f1f3f4] border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#1a73e8]/20 outline-none transition-all placeholder:text-[#9aa0a6] text-sm"
+                autoFocus
+              />
+              <div className="flex gap-3">
+                <Button variant="secondary" onClick={() => setShowApiKeyModal(false)} className="flex-1">Cancelar</Button>
+                <Button onClick={handleSaveApiKey} disabled={!apiKeyInput.trim()} className="flex-1">Guardar</Button>
+              </div>
+            </div>
+          </div>
+        )}
         ) : view === AppView.INPUT ? (
           <div className="space-y-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

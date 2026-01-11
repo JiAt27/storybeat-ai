@@ -9,6 +9,9 @@ import { SongAnalysis, StoryboardScene, AspectRatio, VisualStyle } from "./types
     const urlParams = new URLSearchParams(window.location.search);
     const urlKey = urlParams.get('api_key');
     if (urlKey) return urlKey;
+     // Check localStorage
+  const lsKey = localStorage.getItem('gemini_api_key');
+  if (lsKey) return lsKey;
   }
   // Then check environment variable
   return import.meta.env.VITE_GEMINI_API_KEY;
